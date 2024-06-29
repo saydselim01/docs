@@ -17,13 +17,13 @@ You can access most objects in GitHub (users, issues, pull requests, etc.) using
 
 **Note:** In REST, the global node ID field is named `node_id`. In GraphQL, it's an `id` field on the `node` interface. For a refresher on what "node" means in GraphQL, see "[AUTOTITLE](/graphql/guides/introduction-to-graphql#node)."
 
-{% endnote %}
+{% endnote%}
 
-## Putting global node IDs to use
+## وضع معرفات العقدة العالمية للاستخدام
 
-You can follow three steps to use global node IDs effectively:
+يمكنك اتباع ثلاث خطوات لاستخدام معرفات العقدة العالمية بشكل فعال:
 
-1. Call a REST endpoint that returns an object's `node_id`.
+1. اتصل بنقطة نهاية REST التي تعيد كائنًا ما `node_id`.
 1. Find the object's type in GraphQL.
 1. Use the ID and type to do a direct node lookup in GraphQL.
 
@@ -89,39 +89,39 @@ you'll get a response that includes the `node_id` of the authenticated user:
 
 ## 2. Find the object type in GraphQL
 
-In this example, the `node_id` value is `MDQ6VXNlcjU4MzIzMQ==`. You can use this value to query the same object in GraphQL.
+وفي هذا المثال، فإن 
 
-You'll need to know the object's _type_ first, though. You can check the type with a simple GraphQL query:
+ستحتاج إلى معرفة الكائن. _اكتب._ أولاً، رغم ذلك. يمكنك التحقق من النوع باستخدام استعلام GraphQL بسيط:
 
-```graphql
-query {
-  node(id:"MDQ6VXNlcjU4MzIzMQ==") {
-     __typename
-  }
+"'جرافيك.
+الاستعلام {
+ العقدة (المعرف: "MDQ6VXNlcU4MzIzMQ=") { 
+ __typename. 
+ } 
 }
-```
+"'
 
-This type of query&mdash;that is, finding the node by ID&mdash;is known as a "direct node lookup."
+هذا النوع من الاستعلام و MDash ؛ أي العثور على العقدة بواسطة ID&mdash ؛ يُعرف باسم "البحث المباشر عن العقدة".
 
-When you run this query, you'll see that the `__typename` is [`User`](/graphql/reference/objects#user).
+عند تشغيل هذا الاستعلام.، سترى أن '__typename' هو. ["المستخدم"] (/graphql/reference/objects# المستخدم).
 
-## 3. Do a direct node lookup in GraphQL
+## 3. قم بالبحث المباشر عن العقدة في GraphQL
 
-Once you've confirmed the type, you can use an [inline fragment](https://graphql.org/learn/queries/#inline-fragments) to access the object by its ID and return additional data. In this example, we define the fields on `User` that we'd like to query:
+المستخدم.
 
-```graphql
-query {
-  node(id:"MDQ6VXNlcjU4MzIzMQ==") {
-   ... on User {
-      name
-      login
-    }
-  }
+"'الرسم.
+الاستعلام {
+ العقدة (المعرف: "MDQ6VXNlcU4MzIzMQ=") { 
+ ... على المستخدم { 
+ اسم. 
+ تسجيل الدخول. 
+ } 
+ } 
 }
-```
+"'
 
-This type of query is the standard approach for looking up an object by its global node ID.
+هذا النوع من الاستعلام هو النهج القياسي للبحث عن كائن بواسطة معرف العقدة العالمي.
 
-## Using global node IDs in migrations
+## استخدام معرفات العقدة العالمية في الهجرات
 
-When building integrations that use either the REST API or the GraphQL API, it's best practice to persist the global node ID so you can easily reference objects across API versions. For more information on handling the transition between REST and GraphQL, see "[AUTOTITLE](/graphql/guides/migrating-from-rest-to-graphql)."
+عند بناء عمليات الدمج التي تستخدم إما واجهة برمجة تطبيقات REST أو واجهة برمجة تطبيقات GraphQL، من الأفضل الاستمرار في معرف العقدة العالمي حتى تتمكن من الرجوع بسهولة إلى الكائنات عبر إصدارات واجهة برمجة التطبيقات. لمزيد من المعلومات حول التعامل مع الانتقال بين REST و GraphQL، راجع "[مقالة][مقالة][مقالة][مقالة][مقالة][مقالة][مقالة][مقالة] (/graphql/guides/migrating-from-rest-to-graphql) ".
